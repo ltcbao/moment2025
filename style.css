@@ -3,10 +3,22 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Dancing Script', cursive;
-    background-color: #fde2e4;
     color: #5d3a3a;
     overflow: hidden;
+
+    /* ⭐ HIỆU ỨNG NỀN CHUYỂN ĐỘNG */
+    background: linear-gradient(-45deg, #fde2e4, #e2e2fd, #fde2e4, #d2f7f1);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
 }
+
+/* Keyframe cho hiệu ứng nền */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 
 /* --- Màn hình chờ --- */
 #intro-screen {
@@ -15,17 +27,20 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #fde2e4;
+    /* Nền trong suốt để thấy được background chuyển động */
+    background-color: transparent; 
     display: flex;
     justify-content: center;
     align-items: center;
     z-index: 100;
     opacity: 1;
-    transition: opacity 1s ease-in-out; /* Hiệu ứng mờ dần */
+    transition: opacity 1s ease-in-out;
 }
 
 .intro-content {
     text-align: center;
+    /* Thêm bóng đổ cho chữ để dễ đọc hơn */
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .bear-sticker {
@@ -39,25 +54,44 @@ body {
 }
 
 #open-letter-btn {
-    font-size: 5rem; /* Làm cho lá thư to hơn */
+    font-size: 5rem;
     cursor: pointer;
-    transition: transform 0.3s ease; /* Hiệu ứng khi di chuột */
+    transition: transform 0.3s ease;
+
+    /* ⭐ HIỆU ỨNG LÁ THƯ TỎA SÁNG */
+    animation: pulse 2s infinite;
 }
 
 #open-letter-btn:hover {
-    transform: scale(1.2); /* Phóng to lên một chút */
+    transform: scale(1.2);
+}
+
+/* Keyframe cho hiệu ứng tỏa sáng */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+    }
+    50% {
+        transform: scale(1.1);
+        text-shadow: 0 0 20px rgba(255, 105, 180, 1);
+    }
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
+    }
 }
 
 
 /* --- Nội dung chính --- */
 #main-content {
-    display: none; /* Ban đầu ẩn hoàn toàn */
-    opacity: 0; /* Ban đầu trong suốt */
+    display: none;
+    opacity: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: opacity 1s ease-in-out; /* Hiệu ứng hiện ra */
+    transition: opacity 1s ease-in-out;
 }
 
 /* Hộp chứa lời nhắn */
@@ -65,10 +99,10 @@ body {
     text-align: center;
     padding: 20px;
     border-radius: 15px;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 255, 255, 0.8); /* Tăng độ mờ lên một chút */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     max-width: 80%;
-    z-index: 10; /* Đảm bảo hộp thoại nổi trên trái tim */
+    z-index: 10;
 }
 
 /* Định dạng cho dòng chữ */
@@ -99,7 +133,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1; /* Nằm dưới hộp thoại */
+    z-index: 1;
 }
 
 .heart {
