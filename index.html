@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lời từ trái tim ❤️</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="intro-content">
+            <img src="tiger.png" alt="Gấu dễ thương" class="bear-sticker">
+            <h2>Có một lá thư gửi đến em!</h2>
+            <div id="open-letter-btn" title="Nhấn vào để mở">💌</div>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <div class="heart-container">
+            </div>
+
+        <div class="message-box">
+            <p id="message"></p>
+        </div>
+    </div>
+
+
+    <script>
+        // --- Lời nhắn của bạn ---
+        const messages = [
+            "Chào em,",
+            "Anh viết vài dòng này vì có điều muốn chia sẻ...",
+            "Mấy ngày qua, những lúc được nói chuyện với em ...",
+            "Anh luôn cảm thấy rất vui và đặc biệt bình yên.",
+            "Anh thật sự trân trọng những khoảnh khắc đó.",
+            "Và anh hy vọng rằng...",
+            "Chúng mình sẽ có thêm thật nhiều cơ hội hơn nữa để tìm hiểu nhau,",
+            "Cùng tìm hiểu và viết nên câu chuyện của chúng ta.",
+            "Em nhé!"
+        ];
+        // ----------------------------------------------------
+
+        const introScreen = document.getElementById('intro-screen');
+        const mainContent = document.getElementById('main-content');
+        const openLetterBtn = document.getElementById('open-letter-btn');
+        const messageEl = document.getElementById('message');
+        
+        let messageIndex = 0;
+        let charIndex = 0;
+
+        // Sự kiện khi nhấp vào lá thư
+        openLetterBtn.addEventListener('click', function() {
+            // Làm mờ và ẩn màn hình chờ
+            introScreen.style.opacity = '0';
+            setTimeout(() => {
+                introScreen.style.display = 'none';
+            }, 1000); // 1 giây, khớp với transition trong CSS
+
+            // Hiển thị nội dung chính
+            mainContent.style.display = 'block';
+            setTimeout(() => {
+                mainContent.style.opacity = '1';
+            }, 100); // Hiện ra ngay sau đó
+
+            // Bắt đầu tạo trái tim và gõ chữ SAU KHI mở thư
+            startAnimation();
+        });
+
+        function startAnimation() {
+            // Tạo các trái tim
+            const heartContainer = document.querySelector('.heart-container');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+                heart.style.animationDelay = Math.random() * 3 + 's';
+                heartContainer.appendChild(heart);
+            }
+            // Bắt đầu gõ chữ
+            typeMessage();
+        }
+
+        function typeMessage() {
+            if (messageIndex < messages.length) {
+                if (charIndex < messages[messageIndex].length) {
+                    messageEl.textContent += messages[messageIndex].charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeMessage, 120);
+                } else {
+                    setTimeout(nextMessage, 2000);
+                }
+            }
+        }
+
+        function nextMessage() {
+            messageIndex++;
+            charIndex = 0;
+            messageEl.textContent = '';
+            typeMessage();
+        }
+
+    </script>
+
+</body>
+</html>

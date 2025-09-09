@@ -1,0 +1,122 @@
+/* Thiết lập cơ bản cho toàn trang */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Dancing Script', cursive;
+    background-color: #fde2e4;
+    color: #5d3a3a;
+    overflow: hidden;
+}
+
+/* --- Màn hình chờ --- */
+#intro-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fde2e4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 1s ease-in-out; /* Hiệu ứng mờ dần */
+}
+
+.intro-content {
+    text-align: center;
+}
+
+.bear-sticker {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+#intro-screen h2 {
+    font-size: 2.5rem;
+}
+
+#open-letter-btn {
+    font-size: 5rem; /* Làm cho lá thư to hơn */
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Hiệu ứng khi di chuột */
+}
+
+#open-letter-btn:hover {
+    transform: scale(1.2); /* Phóng to lên một chút */
+}
+
+
+/* --- Nội dung chính --- */
+#main-content {
+    display: none; /* Ban đầu ẩn hoàn toàn */
+    opacity: 0; /* Ban đầu trong suốt */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s ease-in-out; /* Hiệu ứng hiện ra */
+}
+
+/* Hộp chứa lời nhắn */
+.message-box {
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 80%;
+    z-index: 10; /* Đảm bảo hộp thoại nổi trên trái tim */
+}
+
+/* Định dạng cho dòng chữ */
+#message {
+    font-size: 3rem;
+    display: inline;
+    position: relative;
+}
+
+/* Tạo hiệu ứng con trỏ gõ chữ nhấp nháy */
+#message::after {
+    content: '|';
+    position: absolute;
+    right: -15px;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* --- Hiệu ứng trái tim rơi --- */
+.heart-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1; /* Nằm dưới hộp thoại */
+}
+
+.heart {
+    position: absolute;
+    top: -50px;
+    font-size: 2rem;
+    color: #ff8fa3;
+    animation: fall linear;
+}
+
+.heart::before {
+    content: '❤';
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(105vh);
+        opacity: 0;
+    }
+}
